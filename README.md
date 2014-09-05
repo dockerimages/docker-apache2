@@ -1,19 +1,10 @@
-apache249
+apache:2.4.9
 =========
 
-This is the Apache249 Container Maintained by B8G Datentechnik
+This is the Apache Container Maintained by B8G Datentechnik
 
-Explain: 
-# if you need to edit only config
-#FROM scratch
-#VOLUMEN /etc/
+# USE Without docker-tools
 
-# if you only need to change content
-# FROM scratch
-# VOLUMEN /var/www
-
-FROM ubuntu:14.04
-RUN apt-get -y update && \
-    env -i apt-get -y -q --no-install-recommends install \
-    apache2
-
+        docker build -t dockerimages/apache2 git://github.com/dockerimages/apache2
+        
+# 
