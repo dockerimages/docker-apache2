@@ -2,7 +2,7 @@ FROM dockerimages/ubuntu-core:14.04
 MAINTAINER Frank Lemanschik @ B8G Datentechnik
 RUN apt-get -y update && \
     apt-get -y -q --no-install-recommends install \
-    apache2 && \
+    svn build-essential && \
     apt-get -y clean
 
 # let's copy a few of the settings from /etc/init.d/apache2
@@ -23,7 +23,8 @@ ENV LANG C
 
 # ...
 RUN mkdir -p $APACHE_RUN_DIR $APACHE_LOCK_DIR $APACHE_LOG_DIR
-
+RUN mkdir -p /usr/local/apache && cd /usr/local/apache \
+ && svn checkout http://svn.apache.org/repos/asf/httpd/httpd/trunk
 # make CustomLog (access log) go to stdout instead of files
 #  and ErrorLog to stderr
 RUN find "$APACHE_CONFDIR" -type f -exec sed -ri ' \
